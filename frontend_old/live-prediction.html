@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Prediction - RockGuard AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                    <div>ROCKGUARD AI</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">AI SAFETY SYSTEM</div>
+                </div>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="live-prediction.html" class="nav-item active"><i class="fa-solid fa-camera"></i> Live Prediction</a>
+            <a href="mine-map.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Mine Map</a>
+            <a href="alerts.html" class="nav-item"><i class="fa-solid fa-bell"></i> Alert Panel</a>
+            <a href="prediction-history.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+            <a href="analytics.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="reports.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Reports</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Live Prediction</h1>
+            <div style="display: flex; gap: 12px;">
+                <button id="btn-mode-upload" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Upload Sample</button>
+                <button id="btn-mode-simulate" class="btn" style="background: rgba(255,255,255,0.1); color: white;"><i class="fa-solid fa-desktop"></i> Dataset Simulation</button>
+            </div>
+        </div>
+
+        <!-- Simulation Mode Warning Badge -->
+        <div id="simulation-banner" style="display: none; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; color: #93c5fd; font-weight: 600; display: none; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-info"></i> Dataset Simulation Mode - Source: Mine Slope Image Dataset
+        </div>
+
+        <div class="grid-cols-2">
+            <!-- Left Column: Input -->
+            <div class="glass" style="padding: 24px;">
+                <div class="stat-header" style="margin-bottom: 24px;">
+                    <span>Input Source</span>
+                </div>
+                
+                <!-- Upload Area -->
+                <div id="upload-section">
+                    <div class="file-upload-area" id="drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <h3 style="margin-bottom: 8px; font-weight: 600;">Drag & Drop Mine Slope Image</h3>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Or click to browse files</p>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Select File</button>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div id="preview-section" style="display: none; flex-direction: column; gap: 16px;">
+                    <div style="width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
+                        <img id="image-preview" style="width: 100%; height: 100%; object-fit: contain;" src="" alt="Preview">
+                        <div id="source-badge" class="badge" style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); color: white;">
+                            Source: User Uploaded Sample
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="btn-analyze" class="btn btn-primary" style="flex: 1; justify-content: center;"><i class="fa-solid fa-microchip"></i> Analyze Image</button>
+                        <button id="btn-clear" class="btn" style="background: rgba(255,255,255,0.1); color: white;"><i class="fa-solid fa-xmark"></i> Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Results -->
+            <div class="glass" style="padding: 24px; display: flex; flex-direction: column;">
+                <div class="stat-header" style="margin-bottom: 24px;">
+                    <span>Prediction Results</span>
+                </div>
+
+                <!-- Empty State -->
+                <div id="result-empty" class="state-container" style="flex: 1;">
+                    <i class="fa-solid fa-magnifying-glass" style="font-size: 2.5rem; margin-bottom: 16px;"></i>
+                    <p>Upload an image or start simulation<br>to view prediction results.</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="result-loading" class="state-container" style="display: none; flex: 1;">
+                    <div class="loader"></div>
+                    <p>AI is analyzing the slope image...</p>
+                </div>
+
+                <!-- Result Content -->
+                <div id="result-content" style="display: none; flex: 1; flex-direction: column; gap: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);">
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Risk Level</div>
+                            <div id="res-risk-level" style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase;">--</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">AI Confidence</div>
+                            <div id="res-confidence" style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">--%</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Explanation</div>
+                        <div id="res-explanation" style="line-height: 1.5; font-size: 0.95rem;">--</div>
+                    </div>
+
+                    <div id="res-cracks-container" style="display: none;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Detected Issues</div>
+                        <div class="glass" style="padding: 12px; border-left: 3px solid var(--high-risk); background: rgba(239, 68, 68, 0.05);">
+                            <span id="res-cracks-text" style="font-weight: 600;">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/prediction.js"></script>
+</body>
+</html>

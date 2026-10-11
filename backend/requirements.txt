@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+pandas
+numpy
+opencv-python-headless
+scikit-learn
+xgboost
+shap
+sqlalchemy
+psycopg2-binary
+
+python-dotenv

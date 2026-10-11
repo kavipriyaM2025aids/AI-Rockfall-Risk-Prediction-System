@@ -1,0 +1,32 @@
+{
+    "model_checkpoint": "c:\\Users\\kavi priya\\OneDrive\\Documents\\Desktop\\AI ROCKFALL RISK PREDICTION SYSTEM\\backend\\runs\\detect\\rockguard_yolov11\\weights\\best.pt",
+    "model_name": "YOLOv11 Nano",
+    "training_epoch": 17,
+    "test_image_count": 462,
+    "test_label_count": 462,
+    "class_names": {
+        "0": "1",
+        "1": "n"
+    },
+    "test_dataset_path": "c:\\Users\\kavi priya\\OneDrive\\Documents\\Desktop\\AI ROCKFALL RISK PREDICTION SYSTEM\\backend\\dataset\\yolo\\images\\test",
+    "overall": {
+        "precision": 0.791,
+        "recall": 0.24,
+        "mAP50": 0.266,
+        "mAP50_95": 0.152
+    },
+    "per_class": {
+        "0": {
+            "precision": 0.581,
+            "recall": 0.48,
+            "mAP50": 0.528,
+            "mAP50_95": 0.302
+        },
+        "1": {
+            "precision": 1.0,
+            "recall": 0.0,
+            "mAP50": 0.00455,
+            "mAP50_95": 0.00219
+        }
+    }
+}

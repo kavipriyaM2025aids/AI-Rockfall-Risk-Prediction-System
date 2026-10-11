@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - RockGuard AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                    <div>ROCKGUARD AI</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">AI SAFETY SYSTEM</div>
+                </div>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="live-prediction.html" class="nav-item"><i class="fa-solid fa-camera"></i> Live Prediction</a>
+            <a href="mine-map.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Mine Map</a>
+            <a href="alerts.html" class="nav-item"><i class="fa-solid fa-bell"></i> Alert Panel</a>
+            <a href="prediction-history.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+            <a href="analytics.html" class="nav-item active"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="reports.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Reports</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Analytics</h1>
+        </div>
+
+        <div id="analytics-loading" class="state-container">
+            <div class="loader"></div>
+            <p>Loading analytics data...</p>
+        </div>
+
+        <div id="analytics-error" class="state-container" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; color: var(--high-risk); margin-bottom: 16px;"></i>
+            <p>Data unavailable.<br>Failed to retrieve analytics.</p>
+        </div>
+
+        <div id="analytics-content" style="display: none;">
+            <div class="grid-cols-2">
+                <div class="glass" style="padding: 24px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 24px; color: var(--text-muted);">Risk Distribution</h3>
+                    <canvas id="chart-risk" style="max-height: 300px;"></canvas>
+                </div>
+                <div class="glass" style="padding: 24px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 24px; color: var(--text-muted);">Prediction Trend</h3>
+                    <canvas id="chart-trend" style="max-height: 300px;"></canvas>
+                </div>
+                <div class="glass" style="padding: 24px; grid-column: span 2;">
+                    <h3 style="font-size: 1rem; margin-bottom: 24px; color: var(--text-muted);">Confidence Trend over Time</h3>
+                    <canvas id="chart-confidence" style="max-height: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>

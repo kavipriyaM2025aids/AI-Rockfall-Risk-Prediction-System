@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0b0f19;
+  --color-dark-surface: #1e293b;
+  --color-brand-primary: #f59e0b; /* Safety amber/yellow */
+  --color-brand-danger: #ef4444;
+  --color-brand-success: #10b981;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: #f8fafc;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment & Config
+.env
+.env.*
+!.env.example
+venv/
+.venv/
+backend/venv/
+
+# Datasets & Uploads (Exceeds GitHub size limits)
+dataset/
+backend/dataset/
+backend/uploads/
+backend/dataset_annotation_samples/
+
+# Database files
+*.db
+*.sqlite3
+
+# Node dependencies
+node_modules/
+backend/phase7_react_backup/node_modules/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,18 @@
+CURRENT ARCHITECTURE:
+- Database Engine: PostgreSQL 18.6
+- Connection: Connected via psycopg2 locally using credentials stored in .env
+- Legacy Support: SQLite rockfall.db remains securely backed up with historical data untouched.
+
+MIGRATION EXECUTION:
+- Migration script backend/scripts/migrate_sqlite_to_postgresql.py was run successfully.
+- Migrated Records: 10 out of 10 legacy prediction history records transferred directly to PostgreSQL.
+- PostgreSQL Sequence: predictions_id_seq successfully synchronized (setval to 10) to support incremental new inserts seamlessly.
+
+API STATUS:
+- /api/status endpoint successfully confirmed database.engine = PostgreSQL and database.connected = true
+- /api/simulate tested dynamically on the new PostgreSQL backend. It generated record ID 11 with YOLOv11 bounding boxes and passed all integrity checks.
+
+SECURITY:
+- Passwords are fully excluded from the codebase via python-dotenv.
+- .env is hidden and protected in .gitignore.
+- YOLO model functionality and frontend layers were rigorously untouched.

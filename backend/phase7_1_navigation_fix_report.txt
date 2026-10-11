@@ -1,0 +1,36 @@
+# PHASE 7.1 NAVIGATION BUG FIX REPORT
+
+## Root Cause of Blank Pages
+The blank page issue occurred because of a conflict between the HTML markup and the CSS rules. 
+In `index.html`, all secondary views were given the class `view hidden` (e.g. `<div id="view-prediction" class="view hidden"></div>`). 
+However, in `css/style.css`, the `.hidden` class was strictly defined with `display: none !important;`. 
+
+When the JavaScript router (`loadView`) executed `document.getElementById('view-prediction').classList.add('active')`, the active class attempted to apply `display: block;`. But because the `!important` rule from the hardcoded `.hidden` class overrode it, the container remained invisible. Since the router successfully removed the `.active` class from the Dashboard container, the dashboard disappeared, but the new container failed to appear—resulting in a completely blank page.
+
+Furthermore, clicking "Alerts" or "Settings" would throw a silent JavaScript exception and halt rendering because their corresponding container DOM elements and router functions did not exist.
+
+## Exact Fix
+1. **Removed conflicting classes**: Stripped the `.hidden` class from all view container `div`s in `frontend/index.html`. The base `.view` class already handles `display: none;` organically.
+2. **Created missing containers**: Added `<div id="view-alerts" class="view"></div>` and `<div id="view-settings" class="view"></div>` to `index.html`.
+3. **Updated Router**: Added `case 'alerts'` and `case 'settings'` to the `loadView` switch statement in `frontend/js/app.js`.
+4. **Created Rendering Logic**: Appended `renderAlerts()` and `renderSettings()` functions to `app.js` to populate these pages gracefully.
+5. **Added styling utilities**: Added `.text-center` and `.p-8` utility classes to `css/style.css` to properly format the new placeholder pages without needing Tailwind.
+
+## Files Modified
+- `frontend/index.html`
+- `frontend/css/style.css`
+- `frontend/js/app.js`
+
+## Test Results
+1. **Dashboard:** Loads perfectly with metrics from PostgreSQL.
+2. **Analyze Image:** Renders upload form. Active class successfully switches. No blank screen.
+3. **Dataset Simulation:** Renders the simulator UI correctly. No blank screen.
+4. **Prediction History:** Renders the table view. No blank screen.
+5. **Dataset Info:** Renders dataset statistics. No blank screen.
+6. **Model Performance:** Renders evaluation metrics. No blank screen.
+7. **Alerts:** Successfully mounts and displays "No Active Alerts" message. No blank screen.
+8. **Settings:** Successfully mounts and displays "Configuration Unavailable" message. No blank screen.
+9. **Return to Dashboard:** Restores the dashboard seamlessly.
+
+## Remaining Issues
+None. The single-page application routing now operates flawlessly across all sidebar navigation items without relying on React, Vite, or Node.js.

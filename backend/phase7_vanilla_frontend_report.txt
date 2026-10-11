@@ -1,0 +1,49 @@
+# PHASE 7: VANILLA FRONTEND RESTORATION REPORT
+
+## 1. Files Created/Modified
+### New Frontend Files:
+- `frontend/index.html`: Restored standard HTML boilerplate, responsive layout structure using CSS Grid/Flexbox, and side navigation.
+- `frontend/css/style.css`: Crafted a completely custom dark theme mimicking the original React/Tailwind design (slate colors, glassmorphism, brand primary accents, responsive layouts).
+- `frontend/js/app.js`: Written in pure Vanilla JavaScript (0 external JS dependencies other than Lucide icons). Implements a lightweight SPA router, Fetch API calls for all backend endpoints, DOM manipulation, and dynamic HTML generation for prediction history and results.
+
+### Modified Files:
+- `backend/main.py`: Appended `app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")` to elegantly serve the Vanilla frontend via FastAPI without needing any Node.js runtime.
+
+## 2. React Backup
+- The previous React/Vite frontend was fully preserved in `backend/phase7_react_backup/` before the cleanup.
+
+## 3. APIs Connected (Vanilla JS `fetch()`)
+- `GET /api/status`: Provides dashboard connectivity indicators.
+- `GET /api/history`: Populates the dashboard metrics and the full prediction history table.
+- `GET /api/dataset-info`: Hydrates the dataset stats directly from FastAPI.
+- `GET /api/model-performance`: Renders the precise test set evaluation metrics.
+- `POST /api/predict`: Uses `FormData` to natively upload an image to YOLOv11 and renders the OpenCV backend response.
+- `GET /api/simulate`: Safely triggers backend processing of a static dataset image.
+
+## 4. Features Tested & Verified
+1. **Open dashboard:** Dashboard instantly loads on `http://127.0.0.1:8000/`.
+2. **Dashboard values:** Aggregates real total predictions and dynamically counts objects.
+3. **Backend Status:** Correctly indicates PostgreSQL is connected and Model is ready.
+4. **Image Upload:** Drag-and-drop interface works; successfully sends `POST` request to FastAPI.
+5. **YOLOv11 Prediction:** Response returns successfully, UI displays native backend bounding box annotations and confidence scores.
+6. **Dataset Simulation:** Correctly triggers and pulls dataset images for inference without claiming they are live CCTV.
+7. **Prediction History:** Live PostgreSQL records load smoothly into a native HTML table.
+8. **New Predictions:** Both manual uploads and simulations successfully persist in PostgreSQL and immediately appear in the History tab.
+9. **Dataset Information:** Loads 4617 image count, specific class breakdowns, and OOB boxes dynamically.
+10. **Model Metrics:** Displays actual precision (79.1%) and mAP (26.6%), properly warned as object-detection-only metrics.
+11. **Alerts Behavior:** Alert Interpretation gracefully defaults to "Risk prediction unavailable. Model performs object detection only" when `NOT_AVAILABLE` is returned.
+12. **Weather / Location:** Both correctly display "Not Available" with no fabricated values.
+13. **Runtime Dependency Check:** Verified. No Vite, React, or Node.js required. The app is purely static files served natively by Python/FastAPI.
+
+## 5. Remaining Limitations
+- Geolocation and live Weather APIs remain disconnected.
+- The visual alerts logic is limited because Class 1 and Class n do not strictly correlate to a defined Rockfall risk matrix.
+
+## 6. Architecture Compliance Statement
+The architecture now STRICTLY complies with the submitted specifications:
+- **Frontend**: HTML + CSS + Vanilla JavaScript (Served via FastAPI)
+- **Backend**: FastAPI + Python
+- **AI/ML**: YOLOv11 + OpenCV
+- **Database**: PostgreSQL
+
+The project is stable, functional, and properly architected.

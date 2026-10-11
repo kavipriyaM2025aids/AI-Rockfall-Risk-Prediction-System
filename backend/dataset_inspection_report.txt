@@ -1,0 +1,56 @@
+DATASET INSPECTION REPORT
+=========================
+
+Dataset path:
+C:\Users\kavi priya\Downloads\Open-Pit-Mine-Object-Detection-Dataset\Open-Pit-Mine-Object-Detection-Dataset
+
+Total images:
+4617
+
+Total JSON annotations:
+4617
+
+Image formats:
+{'.jpg': 4617}
+
+Image dimensions:
+{(1024, 1024): 4617}
+
+Unique classes:
+['1', 'n', '‘', "'"]
+
+Objects per class:
+{'1': 12532, 'n': 211, '‘': 16, "'": 1}
+
+Images per class:
+{'1': 4553, 'n': 92, '‘': 3, "'": 1}
+
+Images without annotations:
+0
+
+Annotations without matching images:
+0
+
+Invalid/corrupt JSON:
+0
+
+JSON files with missing required fields:
+0
+
+Non-rectangle annotations:
+0
+
+Invalid bounding boxes:
+58 (Outside boundaries: 58, Zero/negative dimensions: 0)
+
+Existing split:
+None
+
+Class distribution:
+{'1': '98.21%', 'n': '1.65%', '‘': '0.13%', "'": '0.01%'}
+
+Potential duplicates:
+Filenames: 0, Content: 0
+
+Label meanings:
+No explicit meaning file found. Labels are numerical.

@@ -1,0 +1,29 @@
+# Phase 6: Frontend + Backend Integration Report
+
+## 1. Files Changed
+- `frontend/src/App.jsx`: Updated React views (Dashboard, Dataset, Model Performance, Prediction, Simulation, History) to map accurately to the real PostgreSQL/FastAPI responses. Replaced the manual duplicate bounding box drawing with the native backend OpenCV annotated output.
+- `backend/main.py`: Updated `/api/dataset-info` and `/api/model-performance` to serve the precise verified dataset numbers and detailed class-by-class metrics.
+
+## 2. APIs Connected
+- `GET /api/status`: Used for real-time model readiness and PostgreSQL connection status.
+- `GET /api/dataset-info`: Supplying validated dataset statistics (4617 total images, splits, object counts).
+- `GET /api/model-performance`: Supplying real YOLOv11 evaluation metrics from test set.
+- `POST /api/predict`: Handles user image uploads, stores in PostgreSQL, returns native bounding boxes.
+- `GET /api/simulate`: Safely simulates predictions using actual dataset images.
+- `GET /api/history`: Retrieves the live PostgreSQL prediction log including the migrated SQLite records.
+
+## 3. Features Tested & Real Test Results
+- **Dashboard**: Verified. Dynamically pulls total predictions and latest prediction directly from PostgreSQL.
+- **Dataset Info**: Verified. Correctly renders static values directly from the backend API, strictly enforcing `12532` objects for Class 1.
+- **Model Performance**: Verified. Accurately reports Precision (79.1%), Recall (24.0%), mAP@50 (26.6%), and mAP@50-95 (15.2%).
+- **Prediction / Simulation Flow**: Verified. Successfully hitting `http://127.0.0.1:8000/api/simulate`, receiving YOLO annotations, rendering OpenCV bounding boxes directly from the backend static image URL (`/uploads/annotated_sim...`), and inserting predictions cleanly into PostgreSQL.
+- **Prediction History**: Verified. Correctly iterating over migrated SQLite records and newly generated simulation records (e.g. ID 11+).
+
+## 4. Remaining Limitations
+- **Risk Percentage (Alerts)**: Because the dataset strictly labels objects as '1' or 'n' without providing semantic ground truth mapping to "rockfall probability", the UI explicitly warns: *"Risk prediction unavailable. Model performs object detection only."*
+- **Model Accuracy**: Test set recall is very low (24%). The model requires more complex training parameters or a heavier architecture to become production-ready.
+
+## 5. Unavailable Features
+- **Weather API**: Fully disabled in UI ("Not Available: API key missing") since there is no existing backend connection to OpenWeatherMap.
+- **Location Geotagging**: Fully disabled in UI ("Not Available: No real geolocation source") as the browser geolocation API is not implemented to capture drone/worker locations.
+- **Live CCTV Feeds**: Replaced with explicit "Dataset Simulation Mode" labels to avoid fabricating a live monitoring feed.

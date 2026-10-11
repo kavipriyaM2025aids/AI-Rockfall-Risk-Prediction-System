@@ -1,0 +1,47 @@
+{
+    "dataset_path": "C:\\Users\\kavi priya\\Downloads\\Open-Pit-Mine-Object-Detection-Dataset\\Open-Pit-Mine-Object-Detection-Dataset",
+    "total_images": 4617,
+    "total_json_annotations": 4617,
+    "image_formats": {
+        ".jpg": 4617
+    },
+    "image_dimensions": {
+        "1024x1024": 4617
+    },
+    "unique_classes": [
+        "1",
+        "n",
+        "\u2018",
+        "'"
+    ],
+    "objects_per_class": {
+        "1": 12532,
+        "n": 211,
+        "\u2018": 16,
+        "'": 1
+    },
+    "images_per_class": {
+        "1": 4553,
+        "n": 92,
+        "\u2018": 3,
+        "'": 1
+    },
+    "images_without_annotations": 0,
+    "annotations_without_images": 0,
+    "corrupt_jsons": 0,
+    "missing_fields_jsons": 0,
+    "non_rectangle_annotations": 0,
+    "invalid_bboxes": 58,
+    "outside_bboxes": 58,
+    "zero_negative_bboxes": 0,
+    "existing_split": [],
+    "class_distribution": {
+        "1": "98.21%",
+        "n": "1.65%",
+        "\u2018": "0.13%",
+        "'": "0.01%"
+    },
+    "duplicate_filenames": 0,
+    "content_duplicates": 0,
+    "label_meanings": "No explicit meaning file found. Labels are numerical."
+}

@@ -1,0 +1,29 @@
+# EXPERIMENTAL RISK MODEL TRAINING REPORT
+
+IMPORTANT DISCLAIMER:
+This is an experimental rule-derived XGBoost model. It has NOT been scientifically validated for real-world rockfall prediction. The labels were derived programmatically from object-detection and environmental features and do NOT represent ground-truth rockfall occurrences.
+
+1. Dataset & Feature Engineering
+- Feature List: ['detection_count', 'max_confidence', 'mean_confidence', 'class_0_count', 'class_1_count', 'total_detected_area_ratio', 'largest_bbox_area_ratio', 'mean_bbox_area_ratio', 'temperature', 'humidity', 'wind_speed', 'precipitation']
+- Total Samples: 462
+- Class Distribution: LOW (95), MEDIUM (168), HIGH (199)
+
+2. Rule-Derived Label Methodology
+Labels were generated using the following experimental logic:
+- HIGH: detection_count >= 5 OR max_confidence > 0.8 OR rainfall > 10
+- MEDIUM: detection_count >= 2 OR max_confidence > 0.5
+- LOW: Otherwise
+
+3. Model Training
+- Algorithm: XGBClassifier
+- Parameters: n_estimators=100, max_depth=4, learning_rate=0.1
+- Train/Test Split: 80% Train, 20% Test (random_state=42)
+
+4. Evaluation Metrics
+- Accuracy:  0.9785
+- Precision: 0.9787
+- Recall:    0.9785
+- F1-Score:  0.9784
+
+5. Limitations
+This model perfectly learned the explicit experimental rules injected into the dataset. Therefore, the metrics reflect its ability to mimic the heuristic rule, not its ability to predict genuine geological rockfall risk.

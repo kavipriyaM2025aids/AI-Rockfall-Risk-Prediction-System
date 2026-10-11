@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Rockfall Early Alert System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i data-lucide="shield-alert"></i></div>
+                <div>
+                    <h1>Smart Rockfall</h1>
+                    <p class="subtitle">Early Alert System</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-view="dashboard">
+                    <i data-lucide="activity"></i> <span>Live Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="prediction">
+                    <i data-lucide="camera"></i> <span>Image Prediction</span>
+                </button>
+                <button class="nav-item" data-view="simulation">
+                    <i data-lucide="play-square"></i> <span>Dataset Simulation</span>
+                </button>
+                <button class="nav-item" data-view="history">
+                    <i data-lucide="history"></i> <span>Prediction History</span>
+                </button>
+                
+                <div class="nav-section">System</div>
+                <button class="nav-item" data-view="dataset">
+                    <i data-lucide="database"></i> <span>Dataset Info</span>
+                </button>
+                <button class="nav-item" data-view="model">
+                    <i data-lucide="target"></i> <span>Model Performance</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Loading Overlay -->
+            <div id="loading-spinner" class="hidden">
+                <i data-lucide="loader-2" class="spin-icon"></i>
+                <p>Loading data...</p>
+            </div>
+
+            <!-- Views -->
+            <div id="view-dashboard" class="view active"></div>
+            <div id="view-prediction" class="view hidden"></div>
+            <div id="view-simulation" class="view hidden"></div>
+            <div id="view-history" class="view hidden"></div>
+            <div id="view-dataset" class="view hidden"></div>
+            <div id="view-model" class="view hidden"></div>
+        </main>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

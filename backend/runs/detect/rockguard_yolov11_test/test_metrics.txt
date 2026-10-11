@@ -1,0 +1,20 @@
+MODEL CHECKPOINT
+- checkpoint path: c:\Users\kavi priya\OneDrive\Documents\Desktop\AI ROCKFALL RISK PREDICTION SYSTEM\backend\runs\detect\rockguard_yolov11\weights\best.pt
+- model name: YOLOv11 Nano
+- training epoch: 17
+
+DATASET
+- test image count: 462
+- test label count: 462
+- class names: {0: '1', 1: 'n'}
+- test dataset path: c:\Users\kavi priya\OneDrive\Documents\Desktop\AI ROCKFALL RISK PREDICTION SYSTEM\backend\dataset\yolo\images\test
+
+RESULTS
+- Precision: 0.79100
+- Recall: 0.24000
+- mAP@50: 0.26600
+- mAP@50–95: 0.15200
+
+PER-CLASS RESULTS
+- Class 0 / original label "1": Precision=0.58100, Recall=0.48000, mAP50=0.52800, mAP50-95=0.30200
+- Class 1 / original label "n": Precision=1.00000, Recall=0.00000, mAP50=0.00455, mAP50-95=0.00219

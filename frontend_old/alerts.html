@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Panel - RockGuard AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                    <div>ROCKGUARD AI</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">AI SAFETY SYSTEM</div>
+                </div>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="live-prediction.html" class="nav-item"><i class="fa-solid fa-camera"></i> Live Prediction</a>
+            <a href="mine-map.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Mine Map</a>
+            <a href="alerts.html" class="nav-item active"><i class="fa-solid fa-bell"></i> Alert Panel</a>
+            <a href="prediction-history.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+            <a href="analytics.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="reports.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Reports</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Alert Panel</h1>
+        </div>
+
+        <div class="glass" style="padding: 24px;">
+            <div id="alerts-loading" class="state-container">
+                <div class="loader"></div>
+                <p>Loading alerts from backend...</p>
+            </div>
+            
+            <div id="alerts-empty" class="state-container" style="display: none;">
+                <i class="fa-solid fa-check-circle" style="font-size: 3rem; color: var(--safe); margin-bottom: 16px;"></i>
+                <p>No active alerts.<br>System operates normally.</p>
+            </div>
+
+            <div id="alerts-error" class="state-container" style="display: none;">
+                <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; color: var(--high-risk); margin-bottom: 16px;"></i>
+                <p>Data unavailable.<br>Failed to retrieve alerts.</p>
+            </div>
+
+            <div id="alerts-container" style="display: none; flex-direction: column; gap: 16px;">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/alerts.js"></script>
+</body>
+</html>

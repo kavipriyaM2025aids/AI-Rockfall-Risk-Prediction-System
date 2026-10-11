@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Map - RockGuard AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                    <div>ROCKGUARD AI</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">AI SAFETY SYSTEM</div>
+                </div>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="live-prediction.html" class="nav-item"><i class="fa-solid fa-camera"></i> Live Prediction</a>
+            <a href="mine-map.html" class="nav-item active"><i class="fa-solid fa-map-location-dot"></i> Mine Map</a>
+            <a href="alerts.html" class="nav-item"><i class="fa-solid fa-bell"></i> Alert Panel</a>
+            <a href="prediction-history.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+            <a href="analytics.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="reports.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Reports</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Mine Map</h1>
+            <div class="glass" style="padding: 10px 16px; border-radius: 8px; display: flex; gap: 12px; align-items: center;">
+                <i class="fa-solid fa-satellite-dish" style="color: var(--primary);"></i>
+                <span id="gps-status">Locating worker...</span>
+            </div>
+        </div>
+
+        <div class="glass" style="padding: 24px;">
+            <div style="display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.85rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--safe);"></div> Safe Zone</div>
+                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--moderate);"></div> Moderate Zone</div>
+                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--early-warning);"></div> Early Warning Zone</div>
+                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--high-risk);"></div> High Risk Zone</div>
+            </div>
+            
+            <div id="map-loading" class="state-container">
+                <div class="loader"></div>
+                <p>Loading map and zones from backend...</p>
+            </div>
+            
+            <div id="mine-map" style="display: none;"></div>
+        </div>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>

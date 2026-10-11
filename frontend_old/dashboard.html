@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RockGuard AI</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                    <div>ROCKGUARD AI</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">AI SAFETY SYSTEM</div>
+                </div>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="live-prediction.html" class="nav-item"><i class="fa-solid fa-camera"></i> Live Prediction</a>
+            <a href="mine-map.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Mine Map</a>
+            <a href="alerts.html" class="nav-item"><i class="fa-solid fa-bell"></i> Alert Panel</a>
+            <a href="prediction-history.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+            <a href="analytics.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="reports.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Reports</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">System Dashboard</h1>
+            <div id="weather-widget" class="glass" style="padding: 10px 16px; border-radius: 8px; display: flex; gap: 12px; align-items: center;">
+                <div class="loader" style="width: 20px; height: 20px; border-width: 2px; margin-bottom: 0;"></div>
+                <span>Loading weather...</span>
+            </div>
+        </div>
+
+        <div id="dashboard-content">
+            <!-- Loading State -->
+            <div id="dashboard-loading" class="state-container">
+                <div class="loader"></div>
+                <p>Loading dashboard statistics...</p>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div id="dashboard-grid" style="display: none;">
+                <div class="grid-cols-4" style="margin-bottom: 24px;">
+                    <div class="glass stat-card">
+                        <div class="stat-header">
+                            <span>Total Predictions</span>
+                            <i class="fa-solid fa-database" style="color: var(--primary);"></i>
+                        </div>
+                        <div class="stat-value" id="stat-total-predictions">--</div>
+                    </div>
+                    
+                    <div class="glass stat-card">
+                        <div class="stat-header">
+                            <span>High Risk Zones</span>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: var(--high-risk);"></i>
+                        </div>
+                        <div class="stat-value text-high-risk" id="stat-high-risk">--</div>
+                    </div>
+                    
+                    <div class="glass stat-card">
+                        <div class="stat-header">
+                            <span>Early Warnings</span>
+                            <i class="fa-solid fa-bolt" style="color: var(--early-warning);"></i>
+                        </div>
+                        <div class="stat-value text-early-warning" id="stat-early-warning">--</div>
+                    </div>
+                    
+                    <div class="glass stat-card">
+                        <div class="stat-header">
+                            <span>Tracked Workers</span>
+                            <i class="fa-solid fa-helmet-safety" style="color: var(--safe);"></i>
+                        </div>
+                        <div class="stat-value" id="stat-tracked-workers">--</div>
+                    </div>
+                </div>
+
+                <div class="grid-cols-3">
+                    <div class="glass" style="padding: 24px; grid-column: span 2;">
+                        <div class="stat-header" style="margin-bottom: 20px;">
+                            <span>Recent Alerts</span>
+                            <a href="alerts.html" style="color: var(--primary); text-decoration: none; text-transform: none;">View All</a>
+                        </div>
+                        <div id="recent-alerts-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="glass" style="padding: 24px;">
+                        <div class="stat-header" style="margin-bottom: 20px;">
+                            <span>System Status</span>
+                            <i class="fa-solid fa-server" style="color: var(--text-muted);"></i>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Avg AI Confidence</span>
+                                <span id="stat-confidence" style="font-weight: 600;">--%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Current Risk Status</span>
+                                <span id="stat-risk-status" class="badge">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Latest Analysis</span>
+                                <span id="stat-latest-time" style="font-weight: 600;">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="dashboard-error" class="state-container" style="display: none;">
+                <i class="fa-solid fa-circle-exclamation" style="font-size: 2rem; margin-bottom: 16px; color: var(--high-risk);"></i>
+                <p>Unable to retrieve dashboard data.<br>Backend data unavailable.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

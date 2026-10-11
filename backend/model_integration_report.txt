@@ -1,0 +1,34 @@
+MODEL
+- YOLOv11n
+- best.pt path: c:\Users\kavi priya\OneDrive\Documents\Desktop\AI ROCKFALL RISK PREDICTION SYSTEM\backend\runs\detect\rockguard_yolov11\weights\best.pt
+- 18 completed training epochs
+- CPU inference
+
+REAL TEST METRICS
+- Precision: 79.1%
+- Recall: 24.0%
+- mAP@50: 26.6%
+- mAP@50–95: 15.2%
+
+CLASS INFORMATION
+- Class 0 = original label "1" (internal name "class_1")
+- Class 1 = original label "n" (internal name "class_n")
+
+IMPORTANT LIMITATION
+- Original class semantics are not confirmed.
+- Therefore the system must not claim that either technical class is definitively "rockfall".
+
+API
+- /api/status: Returns accurate model loaded status and 18-epoch test metrics
+- /api/predict: Handles user uploads safely, generates YOLOv11 detections, returns bounding boxes and saves annotated image.
+- /api/simulate: Uses dataset simulation mode to fetch a real dataset image, run detection, and return actual inferences.
+- other existing endpoints preserved: /api/history, /api/dataset-info, /api/model-performance.
+
+DATABASE
+- prediction history behavior: Preserved using SQLite (database.py). Correctly stores source, bounding boxes, confidences, timestamp, and "NOT_AVAILABLE" risk status.
+
+MODEL OUTPUT
+- bounding boxes: Generated via Ultralytics model.boxes.xyxy
+- class IDs/names: Generated via model.names mapping
+- confidence scores: Generated via model.boxes.conf
+- annotated images: Generated safely via OpenCV using the YOLO bounding boxes, saved independently to backend/uploads.
