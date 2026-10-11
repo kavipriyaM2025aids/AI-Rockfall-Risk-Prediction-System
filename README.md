@@ -91,6 +91,3 @@ Open your browser and navigate to:
 | **Database** | PostgreSQL | Audit trail & historical telemetry |
 
 ---
-
-## 📄 License
-This project is licensed under the MIT License.
